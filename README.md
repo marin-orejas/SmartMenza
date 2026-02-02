@@ -68,21 +68,20 @@ Pokretanjem aplikacije pokrenut će se browser u koji omogućuje testiranje API 
 ### Student:
 * [x] Pregled dnevnog menija 
 * [x] Pregled detalja o jelu
-- Dodavanje ciljeva
-- Ažuriranje ciljeva
-- Brisanje ciljeva
-- AI preporuka obroka
-- Označavanje najdražih jela
-- Uklanjanje određenih jela iz lise najdražih
-- Ocjenjivanje i komentiranje jela
+* [x] Dodavanje ciljeva
+* [x] Ažuriranje ciljeva
+* [x] Brisanje ciljeva
+* [x] Označavanje najdražih jela
+* [x] Uklanjanje određenih jela iz lise najdražih
+* [x] Ocjenjivanje i komentiranje jela
 
 ### Zaposlenik:
-- Unos menija
-- Uređivanje menija
-- Brisanje menija
-- Nutritivna analiza menija putem AI
-- Pregled osnovne statistike
-- Generiranje slike jela putem AI
+* [x] Unos menija
+* [x] Uređivanje menija
+* [x] Brisanje menija
+* [x] Nutritivna analiza menija putem AI
+* [x]- Pregled osnovne statistike
+* [x] Analiza alergen putem AI
 
 * [x] - je oznaka koja određuje da je funkcionalnost obavljena
 
