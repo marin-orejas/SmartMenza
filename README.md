@@ -80,9 +80,8 @@ Pokretanjem aplikacije pokrenut će se browser u koji omogućuje testiranje API 
 * [x] Uređivanje menija
 * [x] Brisanje menija
 * [x] Nutritivna analiza menija putem AI
-* [x]- Pregled osnovne statistike
+* [x] Pregled osnovne statistike
 * [x] Analiza alergen putem AI
-
 * [x] - je oznaka koja određuje da je funkcionalnost obavljena
 
 ## Tehnologije
