@@ -77,6 +77,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("io.coil-kt:coil:2.6.0")
-
+    implementation("com.google.android.gms:play-services-wearable:18.1.0")
 
 }

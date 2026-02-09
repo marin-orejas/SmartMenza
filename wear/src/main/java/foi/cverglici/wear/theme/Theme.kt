@@ -1,4 +1,4 @@
-package com.example.smartmenza.ware.presentation.theme
+package foi.cverglici.wear.theme
 
 import androidx.compose.runtime.Composable
 import androidx.wear.compose.material.MaterialTheme
