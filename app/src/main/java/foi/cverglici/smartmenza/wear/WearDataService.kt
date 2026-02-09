@@ -10,10 +10,10 @@ class WearDataService(private val context: Context) {
 
     private val dataClient by lazy { Wearable.getDataClient(context) }
 
-    fun sendMenuItems(items: List<SimpleMenuItem>): Boolean {
+    fun sendMenuItems(items: List<WearMenuItem>): Boolean {
         return try {
             val serializedItems = items.map { item ->
-                "${item.id}|${item.name}|${item.category}"
+                "${item.title}|${item.price}|${item.description ?: ""}|${item.calories}"
             }
 
             val request = PutDataMapRequest.create("/menu_items").apply {
@@ -31,10 +31,11 @@ class WearDataService(private val context: Context) {
         }
     }
 
-    data class SimpleMenuItem(
-        val id: Int,
-        val name: String,
-        val category: String
+    data class WearMenuItem(
+        val title: String,
+        val price: Double,
+        val description: String?,
+        val calories: Int
     )
 
     companion object {
