@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import foi.cverglici.core.data.model.wear.WearMenuItem
@@ -12,17 +13,15 @@ import foi.cverglici.core.data.model.wear.WearMenuItem
 class WearDataService(private val context: Context) {
 
     private val dataClient by lazy { Wearable.getDataClient(context) }
-
+    private val gson = Gson()
     suspend fun sendMenuItems(items: List<WearMenuItem>): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                val serializedItems = items.map { item ->
-                    "${item.title}|${item.price}|${item.description ?: ""}|${item.calories}"
-                }
+                val json = gson.toJson(items)
 
                 val request = PutDataMapRequest.create("/menu_items").apply {
                     dataMap.putLong("timestamp", System.currentTimeMillis())
-                    dataMap.putStringArrayList("items", ArrayList(serializedItems))
+                    dataMap.putString("items_json", json)
                 }.asPutDataRequest()
                     .setUrgent()
 

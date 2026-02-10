@@ -5,9 +5,15 @@ import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.DataMapItem
 import com.google.android.gms.wearable.WearableListenerService
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import foi.cverglici.core.data.model.wear.WearMenuItem
+import foi.cverglici.wear.data.MenuStorage
 
 class WearDataListenerService : WearableListenerService() {
+
+    private val menuStorage by lazy { MenuStorage(applicationContext) }
+    private val gson = Gson()
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
         dataEvents.forEach { event ->
@@ -20,22 +26,19 @@ class WearDataListenerService : WearableListenerService() {
     }
 
     private fun handleMenuItems(event: DataEvent) {
-        val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
-        val itemsRaw = dataMap.getStringArrayList("items") ?: return
+        try {
+            val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
 
-        val items = itemsRaw.mapNotNull { raw ->
-            val parts = raw.split("|")
-            if (parts.size == 4) {
-                WearMenuItem(
-                    title = parts[0],
-                    price = parts[1].toDoubleOrNull() ?: return@mapNotNull null,
-                    description = parts[2].ifEmpty { null },
-                    calories = parts[3].toIntOrNull() ?: return@mapNotNull null
-                )
-            } else null
+            val json = dataMap.getString("items_json") ?: return
+
+            val type = object : TypeToken<List<WearMenuItem>>() {}.type
+            val items: List<WearMenuItem> = gson.fromJson(json, type)
+
+            menuStorage.saveMenuItems(items)
+            Log.d(TAG, "Received and saved ${items.size} menu items from phone")
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to parse menu items", e)
         }
-
-        Log.d(TAG, "Received ${items.size} menu items from phone")
     }
 
     companion object {
