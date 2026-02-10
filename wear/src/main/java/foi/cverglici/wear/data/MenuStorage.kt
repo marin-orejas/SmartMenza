@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import foi.cverglici.wear.model.WearMenuItem
+import foi.cverglici.core.data.model.wear.WearMenuItem
 
 class MenuStorage(context: Context) {
 

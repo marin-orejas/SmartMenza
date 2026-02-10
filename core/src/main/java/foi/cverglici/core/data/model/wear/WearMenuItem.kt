@@ -1,4 +1,4 @@
-package foi.cverglici.wear.model
+package foi.cverglici.core.data.model.wear
 
 data class WearMenuItem(
     val title: String,

@@ -7,6 +7,7 @@ import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import foi.cverglici.core.data.model.wear.WearMenuItem
 
 class WearDataService(private val context: Context) {
 
@@ -34,13 +35,6 @@ class WearDataService(private val context: Context) {
             }
         }
     }
-
-    data class WearMenuItem(
-        val title: String,
-        val price: Double,
-        val description: String?,
-        val calories: Int
-    )
 
     companion object {
         private const val TAG = "WearDataService"
