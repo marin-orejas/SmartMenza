@@ -9,7 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.wear.compose.material.*
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import foi.cverglici.core.data.model.employee.WearMenuItem
+import foi.cverglici.core.data.model.wear.WearMenuItem
 
 @Composable
 fun MenuScreen(
