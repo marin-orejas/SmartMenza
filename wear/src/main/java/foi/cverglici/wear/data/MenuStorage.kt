@@ -18,7 +18,7 @@ class MenuStorage(context: Context) {
         prefs.edit()
             .putString(KEY_MENU_ITEMS, json)
             .putLong(KEY_LAST_UPDATE, System.currentTimeMillis())
-            .apply()
+            .commit()
     }
 
     fun getMenuItems(): List<WearMenuItem> {
