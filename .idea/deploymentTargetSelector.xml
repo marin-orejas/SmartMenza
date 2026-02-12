@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-02-12T12:11:22.043225073Z">
+        <DropdownSelection timestamp="2026-02-12T17:01:40.369335182Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/home/makilele/.android/avd/Medium_Phone.avd" />
@@ -15,7 +15,7 @@
       </SelectionState>
       <SelectionState runConfigName="ware">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-02-12T12:11:25.407525447Z">
+        <DropdownSelection timestamp="2026-02-12T16:49:29.521476553Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/home/makilele/.android/avd/Wear_OS_Large_Round.avd" />

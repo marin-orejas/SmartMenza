@@ -27,7 +27,7 @@ class MenuListFragment : Fragment() {
     private lateinit var emptyStateText: TextView
     private lateinit var adapter: MenuListAdapter
     private lateinit var menuService: IDishService
-
+    private var currentMenuItems: List<DailyMenuItem> = emptyList()
     private lateinit var tabLunch: TextView
     private lateinit var tabDinner: TextView
 
@@ -136,6 +136,7 @@ class MenuListFragment : Fragment() {
     }
 
     private fun showMenuItems(items: List<DailyMenuItem>) {
+        currentMenuItems = items
         emptyStateText.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
         adapter.submitList(items)
@@ -168,4 +169,6 @@ class MenuListFragment : Fragment() {
         )
         dialog.show()
     }
+
+    fun getCurrentMenuItems(): List<DailyMenuItem> = currentMenuItems
 }

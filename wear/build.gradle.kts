@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.smartmenza.ware"
+        applicationId = "foi.cverglici.smartmenza"
         minSdk = 30
         targetSdk = 36
         versionCode = 1

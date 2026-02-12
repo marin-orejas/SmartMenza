@@ -18,7 +18,7 @@ import foi.cverglici.smartmenza.ui.employee.statistics.StatisticsFragment
 import foi.cverglici.smartmenza.ui.student.favorites.FavoritesFragment
 import foi.cverglici.smartmenza.ui.student.menu.MenuListFragment
 import foi.cverglici.smartmenza.ui.student.goals.GoalsFragment
-import foi.cverglici.core.data.model.wear.WearMenuItem
+import foi.cverglici.core.data.model.wear.toWearMenuItem
 import foi.cverglici.smartmenza.wear.MenuSyncManager
 
 class MainActivity : AppCompatActivity(), OnTopBarActionListener {
@@ -100,27 +100,17 @@ class MainActivity : AppCompatActivity(), OnTopBarActionListener {
     }
 
     private fun syncMenuToWatch() {
-        val testItems = listOf(
-            WearMenuItem(
-                title = "Test juha",
-                price = 1.5,
-                calories = 120,
-                description = "Topla povrtna juha"
-            ),
-            WearMenuItem(
-                title = "Test glavno jelo",
-                price = 3.8,
-                calories = 650,
-                description = "Piletina s rižom i salatom"
-            )
-        )
+        val menuFragment = supportFragmentManager.findFragmentByTag("menu") as? MenuListFragment
+        val todayMenu = menuFragment?.getCurrentMenuItems().orEmpty()
 
-        if (testItems.isEmpty()) {
-            Toast.makeText(this, "Nema menija za slanje.", Toast.LENGTH_SHORT).show()
+        if (todayMenu.isEmpty()) {
+            Toast.makeText(this, "Nema menija za slanje. Otvori jelovnik pa pokušaj opet.", Toast.LENGTH_SHORT).show()
             return
         }
 
-        menuSyncManager.syncMenuToWatch(testItems)
+        val wearItems = todayMenu.map { it.toWearMenuItem() }
+
+        menuSyncManager.syncMenuToWatch(wearItems)
 
         Toast.makeText(this, "Meni poslan na sat.", Toast.LENGTH_SHORT).show()
     }
