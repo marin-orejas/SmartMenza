@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/menu_logout"
-        android:title="Odjavi se"
-        android:icon="@drawable/ic_logout" />
+        android:title="Odjavi se" />
+
+    <item
+        android:id="@+id/action_sync_watch"
+        android:title="Sinkroniziraj sa satom" />
 </menu>

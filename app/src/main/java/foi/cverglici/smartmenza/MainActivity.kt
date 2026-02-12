@@ -63,17 +63,20 @@ class MainActivity : AppCompatActivity(), OnTopBarActionListener {
                 title = "Smart Menza - Student",
                 backgroundColor = R.color.orange_primary,
                 textColor = R.color.white,
-                showUserMenu = true
+                showUserMenu = true,
+                showSyncWatch = true
             )
             sessionManager.isEmployee() -> TopBarConfig(
                 title = "Smart Menza - Zaposlenik",
                 backgroundColor = R.color.soft_teal,
                 textColor = R.color.white,
-                showUserMenu = true
+                showUserMenu = true,
+                showSyncWatch = false
             )
             else -> TopBarConfig(
                 title = getString(R.string.app_name),
-                showUserMenu = true
+                showUserMenu = true,
+                showSyncWatch = false
             )
         }
 
@@ -82,6 +85,19 @@ class MainActivity : AppCompatActivity(), OnTopBarActionListener {
 
     override fun onLogoutClicked() {
         logout()
+    }
+
+    override fun onSyncWatchClicked() {
+        if (!sessionManager.isStudent()) {
+            Toast.makeText(this, "Opcija dostupna samo studentima", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        syncMenuToWatch()
+    }
+
+    private fun syncMenuToWatch() {
+        Toast.makeText(this, "Sinkronizacija menija sa satom...", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupNavigationBasedOnRole() {

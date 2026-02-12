@@ -15,14 +15,15 @@ class TopBarManager(
     private val titleTextView: TextView = topBarView.findViewById(R.id.appTitle)
     private val userMenuButton: ImageButton = topBarView.findViewById(R.id.btnUserMenu)
     private val container: View = topBarView.findViewById(R.id.topBar)
-
     private var listener: OnTopBarActionListener? = null
+    private var currentConfig: TopBarConfig? = null
 
     fun setup(
         config: TopBarConfig,
         listener: OnTopBarActionListener
     ) {
         this.listener = listener
+        this.currentConfig = config
 
         // Set title
         titleTextView.text = config.title
@@ -52,10 +53,17 @@ class TopBarManager(
         val popup = PopupMenu(activity, anchorView)
         popup.menuInflater.inflate(R.menu.user_menu, popup.menu)
 
+        val syncItem = popup.menu.findItem(R.id.action_sync_watch)
+        syncItem.isVisible = currentConfig?.showSyncWatch == true
+
         popup.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_logout -> {
                     showLogoutConfirmation()
+                    true
+                }
+                R.id.action_sync_watch -> {
+                    listener?.onSyncWatchClicked()
                     true
                 }
                 else -> false
