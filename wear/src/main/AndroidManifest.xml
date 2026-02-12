@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-feature android:name="android.hardware.type.watch" />
-
+    <uses-feature android:name="android.hardware.type.watch" android:required="true" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,11 +16,9 @@
         <uses-library
             android:name="wear-sdk"
             android:required="false" />
-
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
-
         <activity
             android:name="foi.cverglici.wear.MainActivity"
             android:exported="true"
@@ -34,7 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <service
             android:name="foi.cverglici.wear.service.WearDataListenerService"
             android:exported="true">
@@ -46,7 +40,5 @@
                     android:pathPrefix="/menu_items" />
             </intent-filter>
         </service>
-
     </application>
-
 </manifest>
