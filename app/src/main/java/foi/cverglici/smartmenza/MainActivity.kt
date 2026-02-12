@@ -18,6 +18,8 @@ import foi.cverglici.smartmenza.ui.employee.statistics.StatisticsFragment
 import foi.cverglici.smartmenza.ui.student.favorites.FavoritesFragment
 import foi.cverglici.smartmenza.ui.student.menu.MenuListFragment
 import foi.cverglici.smartmenza.ui.student.goals.GoalsFragment
+import foi.cverglici.core.data.model.wear.WearMenuItem
+import foi.cverglici.smartmenza.wear.MenuSyncManager
 
 class MainActivity : AppCompatActivity(), OnTopBarActionListener {
 
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity(), OnTopBarActionListener {
     private lateinit var navigationManager: NavigationManager
     private lateinit var topBarManager: TopBarManager
     private lateinit var bottomNavigation: BottomNavigationView
+    private val menuSyncManager by lazy { MenuSyncManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,7 +100,29 @@ class MainActivity : AppCompatActivity(), OnTopBarActionListener {
     }
 
     private fun syncMenuToWatch() {
-        Toast.makeText(this, "Sinkronizacija menija sa satom...", Toast.LENGTH_SHORT).show()
+        val testItems = listOf(
+            WearMenuItem(
+                title = "Test juha",
+                price = 1.5,
+                calories = 120,
+                description = "Topla povrtna juha"
+            ),
+            WearMenuItem(
+                title = "Test glavno jelo",
+                price = 3.8,
+                calories = 650,
+                description = "Piletina s rižom i salatom"
+            )
+        )
+
+        if (testItems.isEmpty()) {
+            Toast.makeText(this, "Nema menija za slanje.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        menuSyncManager.syncMenuToWatch(testItems)
+
+        Toast.makeText(this, "Meni poslan na sat.", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupNavigationBasedOnRole() {
