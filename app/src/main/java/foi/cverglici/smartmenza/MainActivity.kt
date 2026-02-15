@@ -20,6 +20,8 @@ import foi.cverglici.smartmenza.ui.student.menu.MenuListFragment
 import foi.cverglici.smartmenza.ui.student.goals.GoalsFragment
 import foi.cverglici.core.data.model.wear.toWearMenuItem
 import foi.cverglici.smartmenza.wear.MenuSyncManager
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), OnTopBarActionListener {
 
@@ -101,18 +103,26 @@ class MainActivity : AppCompatActivity(), OnTopBarActionListener {
 
     private fun syncMenuToWatch() {
         val menuFragment = supportFragmentManager.findFragmentByTag("menu") as? MenuListFragment
-        val todayMenu = menuFragment?.getCurrentMenuItems().orEmpty()
+            ?: run {
+                Toast.makeText(this, "Otvori jelovnik pa pokušaj opet.", Toast.LENGTH_SHORT).show()
+                return
+            }
 
-        if (todayMenu.isEmpty()) {
-            Toast.makeText(this, "Nema menija za slanje. Otvori jelovnik pa pokušaj opet.", Toast.LENGTH_SHORT).show()
-            return
+        lifecycleScope.launch {
+            val (lunch, dinner) = menuFragment.getBothMenus()
+
+            if (lunch.isEmpty() && dinner.isEmpty()) {
+                Toast.makeText(this@MainActivity, "Nema menija za slanje.", Toast.LENGTH_SHORT).show()
+                return@launch
+            }
+
+            val items = lunch.map { it.toWearMenuItem("Ručak") } + dinner.map { it.toWearMenuItem("Večera") }
+
+            menuSyncManager.syncMenuToWatch(items)
+
+            val message = "Poslano ${items.size} stavki (${lunch.size} ručak, ${dinner.size} večera)"
+            Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
         }
-
-        val wearItems = todayMenu.map { it.toWearMenuItem() }
-
-        menuSyncManager.syncMenuToWatch(wearItems)
-
-        Toast.makeText(this, "Meni poslan na sat.", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupNavigationBasedOnRole() {

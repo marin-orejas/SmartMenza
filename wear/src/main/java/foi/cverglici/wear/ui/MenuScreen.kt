@@ -12,27 +12,20 @@ import androidx.compose.ui.unit.dp
 import foi.cverglici.core.data.model.wear.WearMenuItem
 
 @Composable
-fun MenuScreen(
-    viewModel: MenuViewModel = viewModel()
-) {
+fun MenuScreen(viewModel: MenuViewModel = viewModel()) {
     val menuItems by viewModel.menuItems.collectAsState()
 
-    Scaffold(
-        timeText = {
-            TimeText()
-        }
-    ) {
+    Scaffold(timeText = { TimeText() }) {
         if (menuItems.isEmpty()) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = androidx.compose.ui.Alignment.Center
             ) {
-                Text(
-                    text = "Nema podataka",
-                    style = MaterialTheme.typography.body1
-                )
+                Text("Nema podataka", style = MaterialTheme.typography.body1)
             }
         } else {
+            val groupedItems = menuItems.groupBy { it.mealType }
+
             ScalingLazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(
@@ -42,9 +35,19 @@ fun MenuScreen(
                     end = 10.dp
                 )
             ) {
-                items(menuItems.size) { index ->
-                    MenuItemCard(menuItems[index])
-                    Spacer(modifier = Modifier.height(8.dp))
+                groupedItems.forEach { (mealType, items) ->
+                    item {
+                        Text(
+                            text = mealType,
+                            style = MaterialTheme.typography.title2,
+                            modifier = Modifier.padding(vertical = 8.dp)
+                        )
+                    }
+
+                    items(items.size) { index ->
+                        MenuItemCard(items[index])
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
                 }
             }
         }

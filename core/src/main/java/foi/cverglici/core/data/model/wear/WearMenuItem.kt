@@ -4,5 +4,6 @@ data class WearMenuItem(
     val title: String,
     val price: Double,
     val description: String?,
-    val calories: Int
+    val calories: Int,
+    val mealType: String
 )

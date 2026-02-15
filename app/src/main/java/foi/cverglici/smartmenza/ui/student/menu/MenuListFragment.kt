@@ -170,5 +170,18 @@ class MenuListFragment : Fragment() {
         dialog.show()
     }
 
-    fun getCurrentMenuItems(): List<DailyMenuItem> = currentMenuItems
+    suspend fun getBothMenus(): Pair<List<DailyMenuItem>, List<DailyMenuItem>> {
+        val lunchResponse = menuService.getTodayMenu("lunch")
+        val dinnerResponse = menuService.getTodayMenu("dinner")
+
+        val lunchItems = if (lunchResponse.isSuccessful) {
+            lunchResponse.body() ?: emptyList()
+        } else emptyList()
+
+        val dinnerItems = if (dinnerResponse.isSuccessful) {
+            dinnerResponse.body() ?: emptyList()
+        } else emptyList()
+
+        return Pair(lunchItems, dinnerItems)
+    }
 }
