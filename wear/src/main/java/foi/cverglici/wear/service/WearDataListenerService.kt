@@ -9,8 +9,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import foi.cverglici.core.data.model.wear.WearMenuItem
 import foi.cverglici.wear.data.MenuStorage
-import android.content.Intent
-import foi.cverglici.wear.sync.WearMenuSync
 
 class WearDataListenerService : WearableListenerService() {
 
@@ -30,17 +28,13 @@ class WearDataListenerService : WearableListenerService() {
     private fun handleMenuItems(event: DataEvent) {
         try {
             val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
-
             val json = dataMap.getString("items_json") ?: return
-
             val type = object : TypeToken<List<WearMenuItem>>() {}.type
             val items: List<WearMenuItem> = gson.fromJson(json, type)
 
             menuStorage.saveMenuItems(items)
             Log.d(TAG, "Received and saved ${items.size} menu items from phone")
 
-            val intent = Intent(WearMenuSync.ACTION_MENU_UPDATED)
-            sendBroadcast(intent)
         } catch (e: Exception) {
             Log.e(TAG, "Failed to parse menu items", e)
         }

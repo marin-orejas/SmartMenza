@@ -10,17 +10,12 @@ import androidx.wear.compose.material.*
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import foi.cverglici.core.data.model.wear.WearMenuItem
-import androidx.compose.runtime.LaunchedEffect
 
 @Composable
 fun MenuScreen(
     viewModel: MenuViewModel = viewModel()
 ) {
     val menuItems by viewModel.menuItems.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.loadMenuItems()
-    }
 
     Scaffold(
         timeText = {
