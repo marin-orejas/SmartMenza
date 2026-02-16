@@ -103,26 +103,27 @@ class MainActivity : AppCompatActivity(), OnTopBarActionListener {
 
     private fun syncMenuToWatch() {
         val menuFragment = supportFragmentManager.findFragmentByTag("menu") as? MenuListFragment
-            ?: run {
-                Toast.makeText(this, "Otvori jelovnik pa pokušaj opet.", Toast.LENGTH_SHORT).show()
-                return
-            }
+            ?: return showToast("Otvori jelovnik pa pokušaj opet.")
 
         lifecycleScope.launch {
             val (lunch, dinner) = menuFragment.getBothMenus()
-
-            if (lunch.isEmpty() && dinner.isEmpty()) {
-                Toast.makeText(this@MainActivity, "Nema menija za slanje.", Toast.LENGTH_SHORT).show()
-                return@launch
-            }
 
             val items = lunch.map { it.toWearMenuItem("Ručak") } + dinner.map { it.toWearMenuItem("Večera") }
 
             menuSyncManager.syncMenuToWatch(items)
 
-            val message = "Poslano ${items.size} stavki (${lunch.size} ručak, ${dinner.size} večera)"
-            Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+            val message = if (items.isEmpty()) {
+                "Nema menija za danas. Stari podaci obrisani."
+            } else {
+                "Poslano ${items.size} stavki (${lunch.size} ručak, ${dinner.size} večera)"
+            }
+
+            showToast(message, Toast.LENGTH_LONG)
         }
+    }
+
+    private fun showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, message, length).show()
     }
 
     private fun setupNavigationBasedOnRole() {

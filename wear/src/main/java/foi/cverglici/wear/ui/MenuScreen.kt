@@ -10,6 +10,12 @@ import androidx.wear.compose.material.*
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import foi.cverglici.core.data.model.wear.WearMenuItem
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 
 @Composable
 fun MenuScreen(viewModel: MenuViewModel = viewModel()) {
@@ -40,6 +46,7 @@ fun MenuScreen(viewModel: MenuViewModel = viewModel()) {
                         Text(
                             text = mealType,
                             style = MaterialTheme.typography.title2,
+                            color = MaterialTheme.colors.primary,
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
                     }
@@ -56,13 +63,22 @@ fun MenuScreen(viewModel: MenuViewModel = viewModel()) {
 
 @Composable
 fun MenuItemCard(item: WearMenuItem) {
-    Card(
-        onClick = { },
-        modifier = Modifier.fillMaxWidth()
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        MaterialTheme.colors.primary.copy(alpha = 0.3f),
+                        MaterialTheme.colors.surface.copy(alpha = 0.5f)
+                    )
+                )
+            )
+            .clickable { }
+            .padding(12.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(12.dp)
-        ) {
+        Column {
             Text(
                 text = item.title,
                 style = MaterialTheme.typography.title3,
@@ -78,7 +94,8 @@ fun MenuItemCard(item: WearMenuItem) {
             ) {
                 Text(
                     text = "${item.price} €",
-                    style = MaterialTheme.typography.body2
+                    style = MaterialTheme.typography.body2,
+                    color = MaterialTheme.colors.primary
                 )
                 Text(
                     text = "${item.calories} kcal",

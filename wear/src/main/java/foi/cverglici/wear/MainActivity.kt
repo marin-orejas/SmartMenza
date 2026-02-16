@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.compose.runtime.Composable
-import foi.cverglici.wear.theme.SmartMenzaTheme
+import foi.cverglici.wear.theme.WearAppTheme
 import foi.cverglici.wear.ui.MenuScreen
 
 class MainActivity : ComponentActivity() {
@@ -17,14 +17,16 @@ class MainActivity : ComponentActivity() {
         setTheme(android.R.style.Theme_DeviceDefault)
 
         setContent {
-            WearApp()
+            WearAppTheme {
+                MenuScreen()
+            }
         }
     }
 }
 
 @Composable
 fun WearApp() {
-    SmartMenzaTheme {
+    WearAppTheme {
         MenuScreen()
     }
 }
