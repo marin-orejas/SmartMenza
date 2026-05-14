@@ -1,0 +1,8 @@
+# Tell GitHub Linguist to ignore C# backend folders
+# so that Kotlin is shown as the primary language
+
+SmartMenza.Business/** linguist-detectable=false
+SmartMenza.Core/** linguist-detectable=false
+SmartMenza.Data/** linguist-detectable=false
+SmartMenza.UnitTests/** linguist-detectable=false
+SmartMenza/** linguist-detectable=false
