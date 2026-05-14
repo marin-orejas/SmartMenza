@@ -1,93 +1,180 @@
-# Cverglici-Projekt
+![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat&logo=kotlin&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=flat&logo=android&logoColor=white)
+![Wear OS](https://img.shields.io/badge/Wear%20OS-4285F4?style=flat&logo=wearios&logoColor=white)
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=flat&logo=dotnet&logoColor=white)
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoftazure&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=flat&logo=swagger&logoColor=black)
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue?style=flat)
 
-Predložak za SmartMenzu<br>
-Razvoj mobilne aplikacije u sklopu JCC-a koja studentima pomaže u personalizaciji obroka, praćenju nutritivnih vrijednosti, i postavljanju ciljeva vezanih uz prehranu.
-U donjim sekcijama ovog dokumenta, može se vidjeti zamišljeni popis glavnih funkcionalnosti prema ulogama, kao i upute pokretanja određenog dijela projekta. 
+# SmartMenza
 
-Upute za pokretanje Frontend dijela projekta:
-1. Otvoriti Android Studio
-2. Preko Azure Repos, potrebno je kopirati URL za kloniranje repozitorija.
-3. Unutar Android Studia, odabrati opciju za kloniranje repozitorija.
-4. Kada se prikaže mogućnost za to, unjeti prethodno kopirati URL za kloniranje i odabrati prazan folder.
-5. Dozvoliti da se aplikacija izgradi i potpuno učita.
-6. Prebaciti na granu "main_backup" ili "main" preko "Checkout" opcije.
-7. Pričekati ako je potrebno, prihvatiti opcije ukoliko dođu upozorenja o potrebnom ažuriranju.
-8. Ako još nije vidljiva mogućnost za debuggiranjem ili pokretanjem aplikacije, zatvoriti i ponovno pokrenuti Android Studio.
-9. U suprotnome, pokrenuti aplikaciju.
+SmartMenza is an Android application for a university smart canteen system, developed as a team project at the **Faculty of Organization and Informatics (FOI)** in collaboration with the company **Span**, following agile methodology (Scrum). Students can browse daily menus, track nutritional goals, manage favourite dishes, and leave reviews while canteen employees manage the menu with AI-powered tools.
 
-Ako se sve izvede kao zamišljeno, trebali biste vidjeti početni ekran za prijavu korisnika. Ako se aplikacija samostalno ne otvori, potrebno je među listom aplikacija pronaći aplikaciju pod nazivom "SmartMenza".
-Bit će vidljiva dva fragmenta: login i register fragmenti koji se izmijenjuju prilikom klika na svaki pojedinačni tab button ("Prijava"/"Registracija").
-Možete registrirati vlastiti račun, a možete i koristiti već gotove podatke za prijavu (email/pass): student@test.com, pass123. 
+This repository is a **portfolio copy** of the project originally hosted on Azure DevOps. It includes the complete team codebase along with a **Wear OS companion module**, an individual assignment implemented independently at the end of the semester, enabling real-time smartwatch display of daily canteen menus synchronized from the mobile app.
 
-Za pokretanje Backend dijela projekta:
-Nije potrebno ništa pokretati.
-Server je hostan na Azure-u.
+> Full project documentation (Wiki, user stories, architecture) is written in Croatian, as required by the university course specification.
 
-Kako bi provjerili funkcionalnost backend-a, otvorite ovaj URL u tražilici po izboru:
-https://smartmenza-h5csfahadafnajaq.germanywestcentral-01.azurewebsites.net/swagger
+---
 
-Također možete dohvaćati resurse sa iste putanje unutar tražilice:
-Npr:
-https://smartmenza-h5csfahadafnajaq.germanywestcentral-01.azurewebsites.net/api/User
+## Context
 
-Dostupne putanje i podržani zahtjevi:
-Za DailyMenu
-GET .../api/DailyMenu/today
-GET .../api/DailyMenu/today/grouped
-GET .../api/DailyMenu/{yyyy-mm-dd}
+| | |
+|---|---|
+| **Course** | Agile Mobile Application Development (JCC) |
+| **Partner company** | Span |
+| **Methodology** | Scrum (sprints, backlog, definition of done/ready) |
+| **Team** | 5 members |
+| **My role** | Backend developer (API, business logic, Swagger) + individual Wear OS assignment |
 
-Za Dish
-GET .../api/Dish/{id}
+---
 
-Za User
-GET .../api/User
-POST .../api/User/login
-POST .../api/User/register
-POST .../api/User/google-login
+## Features
 
-Za pokretanje Backend dijela projekta **lokalno**:
+### Student
+- Browse the daily canteen menu (lunch and dinner)
+- View detailed dish information: ingredients, nutritional values, average rating
+- Add, update and delete personal dietary goals: calories, proteins, fats, carbs
+- Mark and manage favourite dishes
+- Rate and comment on dishes and view reviews from other students
 
-1. Otvoriti Visual Studio
-2. Preko Azure Repos, potrebno je kopirati URL za kloniranje repozitorija.
-3. Unutar Visual Studia, odabrati opciju za kloniranje repozitorija.
-4. Kada se prikaže mogućnost za to, unjeti prethodno kopirati URL za kloniranje i odabrati prazan folder.
-5. Kada se repozitorij klonira, pritisnuti na "Git Changes" i prebaciti se na "Backend" granu.
-6. Unutar Visual Studija pritisnuti desni klik na solution i rebuildati ga.
-7. Unutar Visual Studija pritisnuti desni klik na solution i pritisnuti na Restore NuGet Packages.
-8. Pričekati ako je potrebno, prihvatiti opcije ukoliko dođu upozorenja o potrebnom ažuriranju.
-9. Pokrenuti aplikaciju.
+### Canteen employee
+- Create, edit and delete daily menus and dishes
+- Upload dish images
+- AI-powered nutritional analysis of dish ingredients
+- AI-powered dish image generation
+- View usage statistics, most favourited and most reviewed dishes
 
-Kako bi Backend dio aplikacije radio, potrebno je imati instaliran sql express server i uspostavljenu bazu podataka.
-Pokretanjem aplikacije pokrenut će se browser u koji omogućuje testiranje API endpointa uz pomoć swaggera.
+### Wear OS (individual assignment)
+- Display today's lunch and dinner on smartwatch
+- Real-time data synchronization with the mobile app via Wearable Data Layer API
+- Auto-refresh on app open, rotary scroll support
+- Wear OS themed UI consistent with the main application
+- No direct network calls from the watch, battery-efficient design
 
-## Funkcionalnosti koje će do finalne predaje biti implementirane:
-* [x] Registracija korisnika 
-* [x] Prijava korisnika 
-* [x] Dodjela uloge po korisničkom računu (razina studenta ili zaposlenika)
+---
 
-### Student:
-* [x] Pregled dnevnog menija 
-* [x] Pregled detalja o jelu
-* [x] Dodavanje ciljeva
-* [x] Ažuriranje ciljeva
-* [x] Brisanje ciljeva
-* [x] Označavanje najdražih jela
-* [x] Uklanjanje određenih jela iz lise najdražih
-* [x] Ocjenjivanje i komentiranje jela
+## Architecture
 
-### Zaposlenik:
-* [x] Unos menija
-* [x] Uređivanje menija
-* [x] Brisanje menija
-* [x] Nutritivna analiza menija putem AI
-* [x] Pregled osnovne statistike
-* [x] Analiza alergen putem AI
-* [x] - je oznaka koja određuje da je funkcionalnost obavljena
+### System overview
 
-## Tehnologije
-- ASP.NET Core Web API
-- Entity Framework (Code-First)
-- Azure DevOps
-- SQL Server, SSMS, Swagger
+```
+Azure Backend (.NET 8) ──► Android App (Kotlin) ──► Data Layer API ──► Wear OS App
+```
 
+The mobile app fetches menu data from the live Azure-hosted REST API and forwards it to the Wear OS companion app through Google's Wearable Data Layer, avoiding direct network calls from the watch.
 
+### Backend — Layered architecture
+
+The backend follows a strict **multi-layered architecture** with SOLID principles, particularly the Dependency Inversion Principle:
+
+| Layer | Project | Responsibility |
+|---|---|---|
+| API | `SmartMenza.API` | HTTP controllers, request handling, response mapping |
+| Business | `SmartMenza.Business` | All business logic, services, JWT authentication, DTO mapping |
+| Data | `SmartMenza.Data` | EF Core context, entity definitions, migrations, data seeding |
+| Core | `SmartMenza.Core` | Shared enums, constants, no dependencies on other layers |
+
+Controllers are kept clean, no business logic, all dependencies injected via DI:
+```csharp
+builder.Services.AddScoped<IUserService, UserServices>();
+```
+
+### Frontend — Modular architecture
+
+The Android app uses a **modular architecture** for maintainability and reuse:
+
+| Module | Location | Role |
+|---|---|---|
+| `app` | `/app` | Main module — UI, navigation, business logic, API calls |
+| `core` | `/core` | Shared components, `SessionManager`, common abstractions |
+| `mailauth` | `/mailauth` | Email/password registration and login flow |
+| `googleauth` | `/googleauth` | Google OAuth authentication flow |
+| `wear` | `/wear` | Wear OS companion — menu display, Data Layer sync |
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Mobile (Android) | Kotlin, Jetpack Compose, MVVM, Retrofit |
+| Wear OS | Kotlin, Compose for Wear OS, Wearable Data Layer API |
+| Backend | ASP.NET Core 8, Entity Framework Core, JWT |
+| Database | SQL Server, Azure SQL |
+| Authentication | Google OAuth, Email/Password (JWT) |
+| AI integrations | Nutritional analysis API, Image generation API |
+| DevOps | Azure DevOps, Azure App Service |
+| Documentation | Swagger / OpenAPI |
+
+---
+
+## Running the Project
+
+### Mobile app
+1. Clone this repository
+2. Open in Android Studio
+3. Run the `app` configuration on an Android device or emulator (API 26+)
+
+### Wear OS app
+1. Open in Android Studio
+2. Create a Wear OS emulator, **Wear OS Small Round** recommended
+3. Run the `wear` configuration on the Wear emulator
+4. Pair with a running mobile app instance for live data synchronization
+
+### Backend
+The backend is live and publicly accessible, no local setup required.
+
+- **Swagger UI:** https://smartmenza-h5csfahadafnajaq.germanywestcentral-01.azurewebsites.net/swagger
+
+Key endpoints:
+
+```
+GET  /api/DailyMenu/today
+GET  /api/DailyMenu/today/grouped
+GET  /api/DailyMenu/{yyyy-mm-dd}
+GET  /api/Dish/{id}
+GET  /api/User
+POST /api/User/login
+POST /api/User/register
+POST /api/User/google-login
+```
+
+---
+
+## Documentation
+
+Project documentation is located in the [`docs/`](./docs/) folder, exported from the original Azure DevOps Wiki:
+
+- [`Arhitektura-proizvoda-i-podsustava.md`](./docs/Arhitektura-proizvoda-i-podsustava.md) — Full system architecture (frontend modules, backend layers, SOLID principles)
+- [`Funkcionalnosti-aplikacije-(epics,-korisničke-priče).md`](./docs/Funkcionalnosti-aplikacije-(epics,-korisni%C4%8Dke-pri%C4%8De).md) — Epics and user stories for all features
+- [`Plan-iteracija.md`](./docs/Plan-iteracija.md) — Sprint plan and iteration breakdown
+- [`attachments/`](./docs/attachments/) — Architecture diagrams, wireframes, and app screenshots
+
+---
+
+## Contributions
+
+### Team contributions (JCC with Span)
+- Backend API design and implementation (ASP.NET Core 8, Entity Framework Core)
+- Layered architecture with SOLID principles (DIP, SRP, ISP)
+- JWT authentication, email/password and Google OAuth
+- REST API endpoints for menus, dishes, users, reviews, goals, and statistics
+- AI integrations, nutritional analysis and dish image generation
+- Azure deployment and DevOps pipeline setup
+- Swagger / OpenAPI documentation
+- Android mobile app UI/UX design and implementation
+- Application wireframes and screen design
+
+### Individual assignment (Wear OS module)
+- Full Wear OS module implemented independently from scratch
+- Phone-to-watch data synchronization via Wearable Data Layer API
+- `WearDataService` and `WearDataListenerService` implementation
+- Wear OS themed UI built with Compose for Wear OS
+- Battery-efficient architecture, no direct API calls from the watch
+- Debugging and resolving threading and data synchronization issues
+
+---
+
+## License
+
+GPL-3.0 — see [LICENSE](LICENSE) for details.
